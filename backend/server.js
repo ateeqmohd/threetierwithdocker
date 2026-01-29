@@ -11,14 +11,13 @@ const db = mysql.createPool({
   password: "root",
   database: "appdb",
   waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
+  connectionLimit: 10
 });
 
 app.get("/users", (req, res) => {
   db.query("SELECT * FROM users", (err, results) => {
     if (err) {
-      console.error(err);
+      console.error("DB error:", err);
       return res.status(500).send("DB error");
     }
     res.json(results);
