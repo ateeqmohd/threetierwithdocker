@@ -4,25 +4,32 @@
     <title>3 Tier App</title>
 </head>
 <body>
-    <h1>Three Tier Application</h1>
-    <button onclick="loadUsers()">Load Users</button>
 
-    <ul id="users"></ul>
+<h1>Three Tier Application</h1>
 
-    <script>
-        function loadUsers() {
-            fetch("http://localhost:3000/users")
-                .then(res => res.json())
-                .then(data => {
-                    const ul = document.getElementById("users");
-                    ul.innerHTML = "";
-                    data.forEach(u => {
-                        const li = document.createElement("li");
-                        li.innerText = u.name;
-                        ul.appendChild(li);
-                    });
-                });
-        }
-    </script>
+<button onclick="loadUsers()">Load Users</button>
+
+<ul id="users"></ul>
+
+<script>
+function loadUsers() {
+    fetch("http://18.220.211.135:3000/users")
+        .then(res => res.json())
+        .then(data => {
+            const ul = document.getElementById("users");
+            ul.innerHTML = "";
+            data.forEach(u => {
+                const li = document.createElement("li");
+                li.innerText = u.name;
+                ul.appendChild(li);
+            });
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Backend not reachable");
+        });
+}
+</script>
+
 </body>
 </html>
